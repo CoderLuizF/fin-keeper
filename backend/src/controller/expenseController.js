@@ -18,4 +18,16 @@ const createExpense = async (req, res) => {
   }
 };
 
-module.exports = { createExpense };
+const getExpenses = async (req, res) => {
+  try {
+    const expenses = await Expense.find({ user: req.user.id }).sort({
+      createdAt: -1,
+    });
+
+    res.json(expenses);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+module.exports = { createExpense, getExpenses };
