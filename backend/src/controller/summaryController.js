@@ -2,7 +2,7 @@ const Expense = require("../models/Expense");
 
 const getSummary = async (req, res) => {
   try {
-    const expense = await Expense.find({ user: req.user.id });
+    const expenses = await Expense.find({ user: req.user.id });
 
     const total = expenses.reduce((acc, expense) => {
       return acc + expense.amount;
