@@ -30,4 +30,24 @@ const getExpenses = async (req, res) => {
   }
 };
 
-module.exports = { createExpense, getExpenses };
+const deleteExpense = async (req, res) => {
+  try {
+    const expense = await Expense.findById(req.params.id);
+
+    if (!expense) {
+      return res.status(404).json({ message: "Expense not found" });
+    }
+
+    if (expense.user.toString() !== req.user.id) {
+      return res.status(401).json({ message: "Not authorized" });
+    }
+
+    await expense.deleteOne();
+
+    res.json({ message: "Expense deleted" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+module.exports = { createExpense, getExpenses, deleteExpense, updateExpense };
