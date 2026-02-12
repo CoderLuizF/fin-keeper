@@ -21,3 +21,15 @@ const createIncome = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+const getIncomes = async (req, res) => {
+  try {
+    const incomes = await Income.find({ user: req.user.id }).sort({ date: -1 });
+
+    res.json(incomes);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+module.exports = { createIncome, getIncomes };
