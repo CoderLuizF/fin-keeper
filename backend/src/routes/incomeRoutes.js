@@ -4,7 +4,7 @@ const { protect } = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
-router.post("/", protect, createIncome);
-router.post("/", protect, getIncomes);
+router.post("/incomes", protect, createIncome);
+router.post("/incomes", protect, getIncomes);
 
 module.exports = router;
