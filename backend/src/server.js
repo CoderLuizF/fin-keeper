@@ -10,6 +10,7 @@ const summaryRoutes = require("./routes/sumarryRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const monthlySummaryRoutes = require("./routes/monthlySummaryRoutes");
 const incomeRoutes = require("./routes/incomeRoutes");
+const balanceRoutes = require("./routes/balanceRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -26,6 +27,7 @@ app.use("/api", summaryRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", monthlySummaryRoutes);
 app.use("/api", incomeRoutes);
+app.use("/api", balanceRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
