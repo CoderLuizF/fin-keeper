@@ -3,11 +3,11 @@ import Header from "../components/Header";
 
 function MainLayout() {
   return (
-    <div className="layout">
+    <div className="flex h-screen bg-[#f5f6fa] font-sans">
       <Sidebar />
-      <div className="main-area">
+      <div className="flex flex-col flex-1">
         <Header />
-        <main className="content">Content</main>
+        <main className="p-5">Content</main>
       </div>
     </div>
   );
