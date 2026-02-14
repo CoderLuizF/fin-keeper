@@ -1,8 +1,10 @@
+import Sidebar from "../components/Sidebar";
+
 function MainLayout() {
   return (
-    <div>
-      <aside>Sidebar</aside>
-      <main>Content</main>
+    <div className="layout">
+      <Sidebar />
+      <main className="content">Content</main>
     </div>
   );
 }
