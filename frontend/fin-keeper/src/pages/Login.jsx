@@ -23,31 +23,38 @@ export default function Login() {
 
   return (
     <MainLayout>
-      <div>
-        <h1>Login</h1>
+      <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded-lg shadow">
+        <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label>Email</label>
+            <label className="block text-sm font-medium mb-1">Email</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
             />
           </div>
 
           <div>
-            <label>Password</label>
+            <label className="block text-sm font-medium mb-1">Password</label>
             <input
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
             />
           </div>
 
-          <button type="submit">Login</button>
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+          >
+            Login
+          </button>
         </form>
       </div>
     </MainLayout>
