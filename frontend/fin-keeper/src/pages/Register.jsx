@@ -1,5 +1,6 @@
 import { useState } from "react";
 import MainLayout from "../layouts/MainLayout";
+import { registerUser } from "../services/authService";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -7,6 +8,9 @@ export default function Register() {
     email: "",
     password: "",
   });
+
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -17,9 +21,18 @@ export default function Register() {
     }));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    console.log(formData);
+    setError("");
+    setSuccess("");
+
+    try {
+      await registerUser(formData);
+      setSuccess("Account created successfully");
+    } catch (err) {
+      setError("Failed to create account");
+      console.log(err);
+    }
   }
 
   return (
@@ -28,6 +41,14 @@ export default function Register() {
         <h1 className="text-2xl font-bold mb-6 text-center">
           Create your account
         </h1>
+
+        {error && (
+          <p className="mb-4 text-red-600 text-sm text-center">{error}</p>
+        )}
+
+        {success && (
+          <p className="mb-4 text-green-600 text-sm text-center">{success}</p>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
