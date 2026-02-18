@@ -1,11 +1,14 @@
 import { useState } from "react";
 import MainLayout from "../layouts/MainLayout";
+import { loginUser } from "../services/authService";
 
 export default function Login() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const [error, setError] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -16,15 +19,27 @@ export default function Login() {
     }));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    console.log("Login data:", formData);
+    setError("");
+
+    try {
+      await loginUser(formData);
+      console.log("Login successful");
+    } catch (err) {
+      setError("Invalid email or password");
+      console.log(err);
+    }
   }
 
   return (
     <MainLayout>
       <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded-lg shadow">
         <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
+
+        {error && (
+          <p className="mb-4 text-red-600 text-sm text-center">{error}</p>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
