@@ -17,7 +17,7 @@ export function AuthProvider({ children }) {
   function logout() {
     localStorage.removeItem("token");
     setToken(null);
-    isAuthenticated(false);
+    setIsAuthenticated(false);
   }
 
   return (
