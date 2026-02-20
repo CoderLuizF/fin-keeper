@@ -1,6 +1,7 @@
 import { useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { loginUser } from "../services/authService";
+import { useAuth } from "../context/useAuth";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,8 @@ export default function Login() {
   });
 
   const [error, setError] = useState("");
+
+  const { login } = useAuth;
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -24,11 +27,11 @@ export default function Login() {
     setError("");
 
     try {
-      await loginUser(formData);
+      const data = await loginUser(formData);
+      login(data.token);
       console.log("Login successful");
     } catch (err) {
       setError("Invalid email or password");
-      console.log(err);
     }
   }
 
