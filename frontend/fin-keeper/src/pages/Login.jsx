@@ -3,16 +3,18 @@ import { useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { loginUser } from "../services/authService";
 import { useAuth } from "../context/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
   const [error, setError] = useState("");
-
-  const { login } = useAuth;
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -24,6 +26,10 @@ export default function Login() {
   }
 
   async function handleSubmit(event) {
+    const data = await loginUser(formData);
+    login(data.token);
+    navigate("/dashboard");
+
     event.preventDefault();
     setError("");
 
